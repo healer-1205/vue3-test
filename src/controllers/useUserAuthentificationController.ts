@@ -1,6 +1,6 @@
 import api from '@/services/api'
 import useUserStore from '@/store/user'
-import { UserResponseWithJWT, UserToLogin } from '@/types/user.model'
+import { UserResponseWithJWT, UserToLogin, UserPublicInfo } from '@/types/user.model'
 import useAuthStore from '@/store/auth'
 import useResetStore from '@/store/reset'
 
@@ -22,9 +22,17 @@ const logout = async () => {
   })
 }
 
+const getAuthInfo = async () => {
+  return await api.get<UserPublicInfo>('users/me').then((response) => {
+    setMyProfile(response.data)
+    return response
+  })
+}
+
 export default function useUserAuthentificationController() {
   return {
     login,
     logout,
+    getAuthInfo,
   }
 }
