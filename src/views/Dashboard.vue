@@ -1,47 +1,55 @@
 <template>
   <main class="dashboard">
     <h1 class="page-title">Dashboard view</h1>
-    <div v-for="(key, index) in Object.keys(MyProfile)" :key="index">
-      <div>{{ key }}: {{ MyProfile[key] }}</div>
-    </div>
-    <div style="margin-top: 100px" v-if="tasks">
-      <div v-for="(key, index) in Object.keys(tasks)" :key="index">
-        <div>{{ key }}: {{ tasks[key] }}</div>
-      </div>
-    </div>
+
+    <h4>My profile view</h4>
+    <br/>
+    <p>{{ getMyProfile }}</p>
+
+    <br/>
+    <h4>Task List</h4>
+    <table border="1" style="margin-left: auto;margin-right: auto;">
+      <thead>
+      <tr>
+        <td>Title</td>
+        <td>Description</td>
+        <td>Budget</td>
+        <td>Platforms</td>
+        <td>AddedTime</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="task of getTask" v-bind:key="task">
+        <td>{{ task.title }}</td>
+        <td>{{ task.description }}</td>
+        <td>{{ task.budget }}</td>
+        <td>{{ task.platforms.join(', ') }}</td>
+        <td>{{ task.addedTime }}</td>
+      </tr>
+      </tbody>
+    </table>
   </main>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import useUserAuthentificationController from '@/controllers/useUserAuthentificationController'
-import { UserPublicInfo } from '@/types/user.model'
-import useUserStore from '@/store/user'
+  import useUserStore from '@/store/user'
+  import useTaskStore from '@/store/task'
+  import { defineComponent } from 'vue'
 
-export default defineComponent({
-  name: 'Dashboard',
-  data() {
-    return {
-      MyProfile: {} as UserPublicInfo | null,
-      tasks: [],
-    }
-  },
-  created() {
-    const auth = useUserAuthentificationController()
-    const { getTask } = useUserStore()
-    auth
-      .getAuthInfo()
-      .then((response) => {
-        this.MyProfile = response.data
-        this.tasks = getTask()
-      })
-      .catch((e) => {
-        return e
-      })
-  },
-})
+  export default defineComponent({
+    name: 'Dashboard',
+    setup() {
+      const { getMyProfile } = useUserStore()
+      const { getTask } = useTaskStore()
+
+      return {
+        getMyProfile,
+        getTask,
+      }
+    },
+  })
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/styles/views/Dashboard';
+  @import '@/assets/styles/views/Dashboard';
 </style>
