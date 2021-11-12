@@ -5,7 +5,7 @@ import useAuthStore from '@/store/auth'
 import useResetStore from '@/store/reset'
 import useTaskStore from '@/store/task'
 
-const { setMyProfile } = useUserStore()
+// const { setMyProfile } = useUserStore()
 const auth = useAuthStore()
 const reset = useResetStore()
 const { setTask } = useTaskStore()

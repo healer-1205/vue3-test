@@ -4,8 +4,10 @@
 
     <h4>My profile view</h4>
     <br />
-    <p>{{ getMyProfile }}</p>
-
+    <div v-if="getMyProfile != null">
+      <div v-for="(key, index) in Object.keys(getMyProfile)" :key="index">{{ key }}: {{ getMyProfile[key] }}</div>
+    </div>
+    <div v-else>{{}}</div>
     <br />
     <h4>Task List</h4>
     <table border="1" style="margin-left: auto; margin-right: auto">
@@ -41,7 +43,6 @@ export default defineComponent({
   setup() {
     const { getMyProfile } = useUserStore()
     const { getTask } = useTaskStore()
-
     return {
       getMyProfile,
       getTask,
