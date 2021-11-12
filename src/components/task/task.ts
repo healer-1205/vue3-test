@@ -1,9 +1,9 @@
-import {reactive} from 'vue'
-import {useRouter} from 'vue-router'
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import useTaskController from '@/controllers/useTaskController'
-import {EnumPlatforms, EnumPlatformsToArray, TaskModel} from '@/types/task.model'
+import { EnumPlatforms, EnumPlatformsToArray, TaskModel } from '@/types/task.model'
 import useTaskStore from '@/store/task'
-import useErrorStore from "@/store/error";
+import useErrorStore from '@/store/error'
 
 export default function useTask() {
   const taskController = useTaskController()
@@ -22,9 +22,8 @@ export default function useTask() {
     filesIds: [],
   })
 
-
   const store = () => {
-    removeError();
+    removeError()
     taskController
       .save(task)
       .then((response) => {
@@ -32,7 +31,7 @@ export default function useTask() {
         router.push({ name: 'Dashboard' })
       })
       .catch((error) => {
-        setError(error?.response?.data.message || 'Please, Try again!');
+        setError(error?.response?.data.message || 'Please, Try again!')
       })
   }
 
@@ -40,6 +39,6 @@ export default function useTask() {
     task,
     store,
     platforms: EnumPlatforms,
-    error: getError
+    error: getError,
   }
 }

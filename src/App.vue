@@ -10,8 +10,8 @@ import { useRouter } from 'vue-router'
 import useAuthStore from '@/store/auth'
 import useResetStore from './store/reset'
 import AppNav from './components/layout/AppNav.vue'
-import useUserProfileInfoController from "@/controllers/useUserProfileInfoController";
-import useTaskController from "@/controllers/useTaskController";
+import useUserProfileInfoController from '@/controllers/useUserProfileInfoController'
+import useTaskController from '@/controllers/useTaskController'
 
 export default defineComponent({
   name: 'App',
@@ -28,7 +28,7 @@ export default defineComponent({
     }
 
     if (isAuthenticated.value) {
-      profile.findUserProfile();
+      profile.findUserProfile()
       taskController.getTasks({})
     }
 

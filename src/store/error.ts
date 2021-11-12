@@ -8,12 +8,12 @@ export default function useErrorStore() {
     errorList.value = data
   }
   const removeError = () => {
-    errorList.value = ""
+    errorList.value = ''
   }
 
   return {
     getError,
     setError,
-    removeError
+    removeError,
   }
 }

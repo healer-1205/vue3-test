@@ -6,33 +6,32 @@
         Title:
         <input v-model="task.title" class="text-input" type="text" />
       </label>
-      <br/>
+      <br />
       <label class="label">
         Description:
-        <textarea  v-model="task.description" class="text-input"></textarea>
+        <textarea v-model="task.description" class="text-input"></textarea>
       </label>
-      <br/>
+      <br />
       <label class="label">
         Budget Value:
         <input v-model="task.budget.value" class="text-input" type="number" />
       </label>
-      <br/>
+      <br />
       <label class="label">
         Platforms:
-        <template v-for="platform of platforms" v-bind:key="platform">
-          <label >
-            <input type="checkbox"  v-bind:value="platform" v-model="task.platforms">
+        <template v-for="platform of platforms" :key="platform">
+          <label>
+            <input v-model="task.platforms" type="checkbox" :value="platform" />
             {{ platform }}
           </label>
         </template>
-        <br/>
-        <br/>
+        <br />
+        <br />
       </label>
-      <br/>
+      <br />
       <button class="button">Create</button>
-      <br/>
-      <p class="validationError" v-if="error">{{ error}}</p>
-
+      <br />
+      <p v-if="error" class="validationError">{{ error }}</p>
     </form>
   </main>
 </template>
